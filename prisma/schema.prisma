@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model TransactionType {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  Transaction Transaction[]
+}
+
+model Period {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  startDate   DateTime
+  endDate     DateTime
+  Budget      Budget[]
+  Transaction Transaction[]
+}
+
+model BudgetCategory {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  Budget      Budget[]
+  Transaction Transaction[]
+}
+
+model Budget {
+  id         Int            @id @default(autoincrement())
+  name       String         @unique
+  amount     Int
+  category   BudgetCategory @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  period     Period         @relation(fields: [periodId], references: [id])
+  periodId   Int
+
+  @@index([periodId])
+  @@index([categoryId])
+}
+
+model Transaction {
+  id         Int             @id @default(autoincrement())
+  name       String
+  amount     Int
+  date       DateTime
+  type       TransactionType @relation(fields: [typeId], references: [id])
+  typeId     Int
+  category   BudgetCategory  @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  period     Period          @relation(fields: [periodId], references: [id])
+  periodId   Int
+
+  @@index([periodId])
+  @@index([categoryId])
+  @@index([typeId])
+}
