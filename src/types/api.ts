@@ -12,7 +12,7 @@ export interface OffsetPagination {
 
 export interface BaseResponse<T> {
   error?: unknown;
-  result?: T | T[];
+  result?: T;
   message: string;
   pagination: CursorPagination | OffsetPagination;
 }

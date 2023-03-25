@@ -2,7 +2,7 @@ import { PeriodForm } from '@/components/PeriodForm';
 import PeriodList from '@/components/PeriodList';
 import { getPeriod } from '@/services/period';
 
-export default async function Home() {
+export default async function ManagePeriodPage() {
   const periods = await getPeriod();
   return (
     <main>

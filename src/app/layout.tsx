@@ -1,3 +1,6 @@
+import './global.css';
+import '@fontsource/open-sans';
+
 export const metadata = {
   title: 'Pocket Pal',
   description: 'Your budget manager in a pocket',
