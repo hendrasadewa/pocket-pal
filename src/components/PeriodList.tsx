@@ -1,9 +1,8 @@
 'use client';
 
 import { Period } from '@prisma/client';
-import { EditPencil, Trash } from 'iconoir-react';
 import dayjs from 'dayjs';
-import Link from 'next/link';
+import { EditPencil } from 'iconoir-react';
 
 interface Props {
   periods?: Period[];
@@ -29,12 +28,7 @@ export default function PeriodList({ periods = [] }: Props) {
             <td>{dayjs(startDate).format('DD-MMM-YYYY')}</td>
             <td>{dayjs(endDate).format('DD-MMM-YYYY')}</td>
             <td>
-              <Link href={`/manage/period/edit/${id}`}>
-                <EditPencil />
-              </Link>
-              <Link href={`/manage/period/delete/${id}`}>
-                <Trash />
-              </Link>
+              <EditPencil />
             </td>
           </tr>
         ))}
