@@ -3,7 +3,17 @@ import { BaseResponse } from '@/types/api';
 import { Period } from '@prisma/client';
 
 export async function getPeriod(): Promise<BaseResponse<Period[]>> {
-  const response = await ky.get('period');
+  const response = await ky.get('period', { cache: 'no-store' });
+
+  if (!response.ok) {
+    throw new Error(`fetch error: ${response.statusText}`);
+  }
+
+  return await response.json();
+}
+
+export async function getPeriodById(id: number): Promise<BaseResponse<Period>> {
+  const response = await ky.get(`period/${id}`, { cache: 'no-store' });
 
   if (!response.ok) {
     throw new Error(`fetch error: ${response.statusText}`);
@@ -34,9 +44,8 @@ export async function updatePeriod(
   startDate: Date,
   endDate: Date
 ): Promise<BaseResponse<Period[]>> {
-  const response = await ky.post('period', {
+  const response = await ky.patch(`period/${id}`, {
     json: { name, startDate, endDate },
-    searchParams: { id },
   });
 
   if (!response.ok) {

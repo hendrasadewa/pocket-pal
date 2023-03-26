@@ -47,28 +47,45 @@ export function CategoryForm({ mode, id, initialValue }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <div className="form-control w-full">
-        <label className="label">
-          <span className="label-text">Category Name</span>
-        </label>
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input input-bordered w-full"
-          name="categoryName"
-          disabled={isSubmitting}
-          defaultValue={initialValue?.name}
-        />
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col justify-between h-full gap-2 pb-2"
+    >
+      <div className="flex flex-col gap-2 pb-2">
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Category Name</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full"
+            name="categoryName"
+            disabled={isSubmitting}
+            defaultValue={initialValue?.name}
+          />
+        </div>
+        <EmojiSelector onSelected={(emoji) => setEmoji(emoji)} />
       </div>
-      <EmojiSelector onSelected={(emoji) => setEmoji(emoji)} />
-      <button
-        type="submit"
-        className={['btn btn-block', isSubmitting ? 'loading' : ''].join(' ')}
-        disabled={isSubmitting}
-      >
-        Submit
-      </button>
+      <div className="flex flex-col gap-2">
+        <button
+          type="submit"
+          className={['btn btn-block', isSubmitting ? 'loading' : ''].join(' ')}
+          disabled={isSubmitting}
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline"
+          disabled={isSubmitting}
+          onClick={() => {
+            router.back();
+          }}
+        >
+          Back
+        </button>
+      </div>
     </form>
   );
 }

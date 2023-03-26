@@ -1,4 +1,9 @@
-import { CandlestickChart, PiggyBank, Settings, Wallet } from 'iconoir-react';
+import {
+  CandlestickChart,
+  DataTransferBoth,
+  Settings,
+  Wallet,
+} from 'iconoir-react';
 import Link from 'next/link';
 
 export default function BottomNavigation() {
@@ -8,7 +13,7 @@ export default function BottomNavigation() {
         <Wallet />
       </Link>
       <Link href="/" className="flex items-center justify-center" replace>
-        <PiggyBank />
+        <DataTransferBoth />
       </Link>
       <Link href="/" className="flex items-center justify-center" replace>
         <CandlestickChart />

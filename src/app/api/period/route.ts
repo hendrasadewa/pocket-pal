@@ -30,34 +30,3 @@ export async function POST(request: Request) {
     return errorHandler(error);
   }
 }
-
-export async function PATCH(request: Request) {
-  try {
-    const body = await request.json();
-
-    const result = await prisma.period.update({
-      data: {
-        name: body.name,
-        startDate: new Date(body.startDate),
-        endDate: new Date(body.endDate),
-      },
-      where: { id: getIdFromQS(request) },
-    });
-
-    return formatResponse(`Successfully updated Period ${result.name}`, result);
-  } catch (error) {
-    return errorHandler(error);
-  }
-}
-
-export async function DELETE(request: Request) {
-  try {
-    const result = await prisma.period.delete({
-      where: { id: getIdFromQS(request) },
-    });
-
-    return formatResponse(`Successfully deleted Period ${result.name}`, result);
-  } catch (error) {
-    return errorHandler(error);
-  }
-}
