@@ -5,8 +5,7 @@ export async function GET() {
   try {
     const result = await prisma.transaction.findMany({
       include: {
-        category: true,
-        period: true,
+        budget: true,
         type: true,
       },
     });
@@ -28,8 +27,7 @@ export async function POST(request: Request) {
         name: body.name,
         amount: body.amount,
         date: new Date(body.date),
-        categoryId: body.categoryId,
-        periodId: body.periodId,
+        budgetId: body.budgetId,
         typeId: body.typeId,
       },
     });
@@ -52,8 +50,7 @@ export async function PATCH(request: Request) {
         name: body.name,
         amount: body.amount,
         date: new Date(body.date),
-        categoryId: body.categoryId,
-        periodId: body.periodId,
+        budgetId: body.budgetId,
         typeId: body.typeId,
       },
       where: { id: getIdFromQS(request) },

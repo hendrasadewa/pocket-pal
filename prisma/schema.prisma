@@ -15,47 +15,43 @@ model TransactionType {
 }
 
 model Period {
-  id          Int           @id @default(autoincrement())
-  name        String        @unique
-  startDate   DateTime
-  endDate     DateTime
-  Budget      Budget[]
-  Transaction Transaction[]
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  startDate DateTime
+  endDate   DateTime
+  Budget    Budget[]
 }
 
-model BudgetCategory {
-  id          Int           @id @default(autoincrement())
-  name        String        @unique
-  Budget      Budget[]
-  Transaction Transaction[]
+model Category {
+  id     Int      @id @default(autoincrement())
+  name   String   @unique
+  Budget Budget[]
 }
 
 model Budget {
-  id         Int            @id @default(autoincrement())
-  name       String         @unique
-  amount     Int
-  category   BudgetCategory @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  period     Period         @relation(fields: [periodId], references: [id])
-  periodId   Int
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  amount      Int
+  category    Category      @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  period      Period        @relation(fields: [periodId], references: [id])
+  periodId    Int
+  Transaction Transaction[]
 
   @@index([periodId])
   @@index([categoryId])
 }
 
 model Transaction {
-  id         Int             @id @default(autoincrement())
-  name       String
-  amount     Int
-  date       DateTime
-  type       TransactionType @relation(fields: [typeId], references: [id])
-  typeId     Int
-  category   BudgetCategory  @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  period     Period          @relation(fields: [periodId], references: [id])
-  periodId   Int
+  id       Int             @id @default(autoincrement())
+  name     String
+  amount   Int
+  date     DateTime
+  type     TransactionType @relation(fields: [typeId], references: [id])
+  typeId   Int
+  budget   Budget          @relation(fields: [budgetId], references: [id])
+  budgetId Int
 
-  @@index([periodId])
-  @@index([categoryId])
   @@index([typeId])
+  @@index([budgetId])
 }

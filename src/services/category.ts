@@ -1,11 +1,9 @@
 import ky from '@/lib/ky';
 import { BaseResponse } from '@/types/api';
-import { BudgetCategory } from '@prisma/client';
+import { Category } from '@prisma/client';
 
-export async function getBudgetCategory(): Promise<
-  BaseResponse<BudgetCategory[]>
-> {
-  const response = await ky.get('budget/category');
+export async function getCategory(): Promise<BaseResponse<Category[]>> {
+  const response = await ky.get('category');
 
   if (!response.ok) {
     throw new Error(`fetch error: ${response.statusText}`);
@@ -14,10 +12,10 @@ export async function getBudgetCategory(): Promise<
   return await response.json();
 }
 
-export async function createBudgetCategory(
+export async function createCategory(
   name: string
-): Promise<BaseResponse<BudgetCategory[]>> {
-  const response = await ky.post('budget/category', {
+): Promise<BaseResponse<Category[]>> {
+  const response = await ky.post('category', {
     json: { name },
   });
 
@@ -28,11 +26,11 @@ export async function createBudgetCategory(
   return await response.json();
 }
 
-export async function updateBudgetCategory(
+export async function updateCategory(
   id: number,
   name: string
-): Promise<BaseResponse<BudgetCategory[]>> {
-  const response = await ky.post('budget/category', {
+): Promise<BaseResponse<Category[]>> {
+  const response = await ky.post('category', {
     json: { name },
     searchParams: { id },
   });

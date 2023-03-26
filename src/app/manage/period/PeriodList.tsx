@@ -1,8 +1,8 @@
 import { Period } from '@prisma/client';
 import { Calendar } from 'iconoir-react';
 import dayjs from 'dayjs';
-import ListItem from '../../../components/ListItem';
-import ListContainer from '../../../components/ListContainer';
+import ListItem from '@/components/ListItem';
+import ListContainer from '@/components/ListContainer';
 
 interface Props {
   data?: Period[];

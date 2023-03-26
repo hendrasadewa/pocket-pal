@@ -3,7 +3,7 @@ import { errorHandler, formatResponse, getIdFromQS } from '@/utils/api';
 
 export async function GET(request: Request) {
   try {
-    const result = await prisma.budgetCategory.findMany();
+    const result = await prisma.category.findMany();
     return formatResponse(
       `Successfully fetched ${result.length} Budget Categories`,
       result
@@ -17,14 +17,14 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const result = await prisma.budgetCategory.create({
+    const result = await prisma.category.create({
       data: {
         name: body.name,
       },
     });
 
     return formatResponse(
-      `Successfully created Budget Category ${result.name}`,
+      `Successfully created Category ${result.name}`,
       result
     );
   } catch (error) {
@@ -36,17 +36,14 @@ export async function PATCH(request: Request) {
   try {
     const body = await request.json();
 
-    const result = await prisma.budgetCategory.update({
+    const result = await prisma.category.update({
       data: {
         name: body.name,
       },
       where: { id: getIdFromQS(request) },
     });
 
-    return formatResponse(
-      `Successfully update budget category ${body.name}`,
-      result
-    );
+    return formatResponse(`Successfully update Category ${body.name}`, result);
   } catch (error) {
     return errorHandler(error);
   }
@@ -54,12 +51,12 @@ export async function PATCH(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const result = await prisma.budgetCategory.delete({
+    const result = await prisma.category.delete({
       where: { id: getIdFromQS(request) },
     });
 
     return formatResponse(
-      `Successfully deleted Budget Category ${result.name}`,
+      `Successfully deleted Category ${result.name}`,
       result
     );
   } catch (error) {

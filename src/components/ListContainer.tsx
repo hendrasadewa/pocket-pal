@@ -6,7 +6,7 @@ interface Props {
 
 export default function ListContainer({ children }: Props) {
   return (
-    <div className="flex flex-col bg-white rounded-xl divide-y shadow">
+    <div className="flex flex-col bg-base-100 rounded-xl divide-y shadow">
       {children}
     </div>
   );
