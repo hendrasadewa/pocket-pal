@@ -5,7 +5,7 @@ interface Props {
   params: { id: number };
 }
 
-export default async function EditCategory({ params }: Props) {
+export default async function EditBudget({ params }: Props) {
   const { id } = params;
   const initialValue = await getCategoryById(id);
   return (

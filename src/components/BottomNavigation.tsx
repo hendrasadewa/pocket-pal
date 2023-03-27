@@ -12,10 +12,18 @@ export default function BottomNavigation() {
       <Link href="/" className="flex items-center justify-center" replace>
         <Wallet />
       </Link>
-      <Link href="/" className="flex items-center justify-center" replace>
+      <Link
+        href="/transactions"
+        className="flex items-center justify-center"
+        replace
+      >
         <DataTransferBoth />
       </Link>
-      <Link href="/" className="flex items-center justify-center" replace>
+      <Link
+        href="/analytics"
+        className="flex items-center justify-center"
+        replace
+      >
         <CandlestickChart />
       </Link>
       <Link href="/manage" className="flex items-center justify-center" replace>

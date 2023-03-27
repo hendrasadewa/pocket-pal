@@ -1,4 +1,4 @@
-import { Box, Calendar, DataTransferBoth } from 'iconoir-react';
+import { Box, Calendar, PiggyBank } from 'iconoir-react';
 import Link from 'next/link';
 
 import ListContainer from '@/components/ListContainer';
@@ -24,6 +24,17 @@ export default function ManagePage() {
             <div className="flex items-center gap-2">
               <Calendar />
               <span>Period</span>
+            </div>
+          }
+          descriptions=""
+        />
+      </Link>
+      <Link href="/manage/budget">
+        <ListItem
+          title={
+            <div className="flex items-center gap-2">
+              <PiggyBank />
+              <span>Budget</span>
             </div>
           }
           descriptions=""

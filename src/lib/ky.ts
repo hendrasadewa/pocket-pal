@@ -7,6 +7,7 @@ const ky = baseKy.create({
   headers: {
     'content-type': 'application/json',
   },
+  cache: 'no-store',
 });
 
 export default ky;
