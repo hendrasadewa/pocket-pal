@@ -1,6 +1,4 @@
-import prisma from '@/lib/prisma';
 import { CursorPagination, OffsetPagination } from '@/types/api';
-import { Prisma, PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
 export function formatResponse<T>(

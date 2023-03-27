@@ -1,9 +1,4 @@
-import '@fontsource/open-sans';
 import './global.css';
-
-import Screen from '@/components/Screen';
-import BottomNavigation from '@/components/BottomNavigation';
-import HeaderNav from '@/components/HeaderNav';
 
 export const metadata = {
   title: 'Pocket Pal',
@@ -17,12 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="winter">
-      <Screen
-        headerComponent={<HeaderNav />}
-        footerComponent={<BottomNavigation />}
-      >
-        {children}
-      </Screen>
+      <body>{children}</body>
     </html>
   );
 }
