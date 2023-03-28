@@ -1,12 +1,23 @@
 import prisma from '@/lib/prisma';
-import { errorHandler, formatResponse, getIdFromQS } from '@/utils/api';
+import { errorHandler, formatResponse } from '@/utils/api';
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     const result = await prisma.transaction.findMany({
-      include: {
-        budget: true,
+      select: {
+        id: true,
+        amount: true,
+        date: true,
+        name: true,
         type: true,
+        typeId: true,
+        budgetId: true,
+        budget: {
+          include: {
+            category: true,
+            period: true,
+          },
+        },
       },
     });
     return formatResponse(
@@ -27,54 +38,12 @@ export async function POST(request: Request) {
         name: body.name,
         amount: body.amount,
         date: new Date(body.date),
-        budgetId: body.budgetId,
         typeId: body.typeId,
+        budgetId: body.budgetId,
       },
     });
 
-    return formatResponse(
-      `Successfully created transaction ${result.name}`,
-      result
-    );
-  } catch (error) {
-    return errorHandler(error);
-  }
-}
-
-export async function PATCH(request: Request) {
-  try {
-    const body = await request.json();
-
-    const result = await prisma.transaction.update({
-      data: {
-        name: body.name,
-        amount: body.amount,
-        date: new Date(body.date),
-        budgetId: body.budgetId,
-        typeId: body.typeId,
-      },
-      where: { id: getIdFromQS(request) },
-    });
-
-    return formatResponse(
-      `Successfully updated transaction ${result.name}`,
-      result
-    );
-  } catch (error) {
-    return errorHandler(error);
-  }
-}
-
-export async function DELETE(request: Request) {
-  try {
-    const result = await prisma.transaction.delete({
-      where: { id: getIdFromQS(request) },
-    });
-
-    return formatResponse(
-      `Successfully deleted transaction ${result.name}`,
-      result
-    );
+    return formatResponse(`Successfully created Period ${result.name}`, result);
   } catch (error) {
     return errorHandler(error);
   }
